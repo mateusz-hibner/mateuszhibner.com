@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mateusz Hibner - Projects">
+    <title>Projects · Mateusz Hibner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="src/styles/main.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="profile-section">
+                <img src="public/images/mh.jpg" alt="Mateusz Hibner" class="profile-picture">
+                <div class="profile-text">
+                    <h1 class="name">Mateusz Hibner</h1>
+                    <p class="description">Side projects that explore AI, cognition and product prototyping.</p>
+                </div>
+            </div>
+        </header>
+
+        <section class="links-section">
+            <div class="links-grid">
+                <a href="index.html" class="link-card">Home</a>
+                <a href="courses.html" class="link-card">Courses</a>
+            </div>
+        </section>
+        <section class="projects-section project-list">
+            <article class="project-card project-card--with-thumb project-card--cover">
+                <figure>
+                    <img src="public/videos/waste.gif" alt="W.A.S.T.E. preview" loading="lazy">
+                </figure>
+                <div class="project-content">
+                    <div class="project-header">
+                        <div class="project-heading-group">
+                            <h2><a href="waste.html">W.A.S.T.E. — Waste Assessment & Sorting Technology Engine</a></h2>
+                            <span class="project-meta">Raspberry Pi · YOLO11s · HCI</span>
+                        </div>
+                    </div>
+                    <p>CNN-powered trash can that opens the correct lid after classifying an item. Motion sensing, LED feedback and servo-driven lids make recycling seamless.</p>
+                </div>
+            </article>
+
+            <article class="project-card project-card--with-thumb">
+                <figure>
+                    <img src="public/images/rw corr.png" alt="COCOMO workflow" loading="lazy">
+                </figure>
+                <div class="project-content">
+                    <div class="project-header">
+                        <div class="project-heading-group">
+                            <h2><a href="cocomo.html">COCOMO Effort Estimation Study</a></h2>
+                            <span class="project-meta">XGBoost · DNDT · Regression</span>
+                        </div>
+                    </div>
+                    <p>Compared Decision Trees, XGBoost, and Deep Neural Decision Trees on the compact COCOMO II dataset, including augmentation and exhaustive k-fold tuning.</p>
+                </div>
+            </article>
+
+        </section>
+    </div>
+</body>
+</html>

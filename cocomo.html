@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mateusz Hibner - COCOMO Effort Estimation Study">
+    <title>COCOMO Effort Estimation · Mateusz Hibner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="src/styles/main.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="profile-section">
+                <img src="public/images/mh.jpg" alt="Mateusz Hibner" class="profile-picture">
+                <div class="profile-text">
+                    <h1 class="name">Mateusz Hibner</h1>
+                    <p class="description">Performance comparison of machine-learning and deep-learning models for software cost estimation.</p>
+                </div>
+            </div>
+        </header>
+
+        <section class="links-section">
+            <div class="links-grid">
+                <a href="index.html" class="link-card">Home</a>
+                <a href="projects.html" class="link-card">Projects</a>
+                <a href="courses.html" class="link-card">Courses</a>
+            </div>
+        </section>
+
+        <section class="project-case-study" id="cocomo">
+            <header class="project-case-study__header">
+                <h2>Performance Comparison of ML vs. DL Models in Software Cost & Effort Estimation</h2>
+                <p class="project-authors">Niels van der Avort · Mateusz Hibner · Benjamin van der Hurk · Jonas Retz · Balint Tapai</p>
+            </header>
+
+            <div class="project-case-study__body">
+                <h3>Abstract</h3>
+                <p>We benchmarked a Decision Tree (DT) baseline, XGBoost, and a Deep Neural Decision Tree (DNDT) on the COCOMO II dataset. With only 97 historical projects available, we expanded the dataset using Gaussian-noise augmentation and evaluated each model with an 80/20 split plus k-fold tuning. XGBoost delivered the best MAE/MRE/R² scores, proving more robust to noise than DNDT while the simple DT surprisingly held its ground on variance metrics.</p>
+
+                <h3>Introduction</h3>
+                <p>Accurate software-effort estimation informs staffing, budget, and project feasibility. Earlier approaches relied on expert judgment, but modern ML/DL models offer reproducible predictions. Our study investigates whether the added complexity of DNDTs is worthwhile compared to strong tabular learners such as XGBoost when data is scarce.</p>
+
+                <h3>Dataset & Features</h3>
+                <p>The revised COCOMO II dataset contains 97 projects with four key columns: <strong>E</strong> (estimated effort), <strong>PEMi</strong> (effort multipliers), <strong>Size KLOC</strong> (thousands of lines of code), and the target <strong>ACT_EFFORT</strong>. We log-transformed skewed distributions and applied a <code>RobustScaler</code> to limit the impact of outliers. Figure analyses (not shown) highlighted strong correlation between E and PEMi (0.60) and confirmed Size KLOC as the dominant predictor.</p>
+
+                <h3>Methodology</h3>
+                <p>After cleaning, we injected Gaussian noise (σ = 0.05) to double the dataset to 190 points. We then trained:</p>
+                <ul>
+                    <li><strong>Decision Tree:</strong> transparent baseline for quick interpretability.</li>
+                    <li><strong>XGBoost:</strong> gradient-boosted trees with regularization and exhaustive Grid Search (27 combos).</li>
+                    <li><strong>DNDT:</strong> differentiable decision tree with soft splits optimized via gradient descent.</li>
+                </ul>
+                <p>Metrics included MAE, MRE, R², and Adjusted R². The top model received extra tuning with k-fold cross-validation.</p>
+
+                <h3>Results</h3>
+                <p>XGBoost achieved MAE 0.30, MRE 0.36, R² 0.59, and Adjusted R² 0.55 on the test set, outperforming DNDT (MAE 0.40, MRE 0.74) and narrowly edging the DT baseline (MAE 0.31). Feature importance confirmed that Size KLOC drives predictions, aligning with the correlation analysis.</p>
+
+                <h3>Discussion</h3>
+                <p>DNDT struggled with overfitting because the dataset is too small to leverage its expressiveness; even with augmentation, noise sensitivity remained. XGBoost balanced bias/variance best, though it still showed signs of overfitting the training set (Adjusted R² ≈ 1.0) and would benefit from richer features. The DT baseline remains compelling when interpretability and stability trump raw accuracy.</p>
+
+                <h3>Conclusion</h3>
+                <p>XGBoost is the most reliable choice for low-data software-effort estimation tasks, especially when paired with lightweight augmentation. DNDTs require more data diversity, while decision trees provide a trustworthy fallback with minimal tuning.</p>
+
+                <h3>Statement of Technology</h3>
+                <p>We used Python, scikit-learn, XGBoost, and the DNDT reference implementation. ChatGPT and Quillbot assisted with text polishing, Scribbr handled APA references, and Miro documented the research pipeline.</p>
+
+                <h3>Contribution</h3>
+                <p>Balint coordinated experiments and preprocessing; Niels led the analyses; Jonas owned model training/evaluation; Benjamin wrote discussion and future work; Mateusz delivered the initial research pitch, coordinated documentation, and supported model comparisons.</p>
+
+                <h3>References</h3>
+                <ul class="project-references">
+                    <li>Arifuzzaman, M. et al. (2023). <em>Technologies</em>, 11(1), 24.</li>
+                    <li>COCOMO™ II site resources (n.d.). USC.</li>
+                    <li>Draz, M. M. et al. (2024). <em>Scientific Reports</em>, 14(1).</li>
+                    <li>Feizpour, E. et al. (2023). <em>Journal of Software Evolution and Process</em>, 35(12).</li>
+                    <li>Hoc, H. T. et al. (2023). <em>IEEE Access</em>, 11, 60590–60604.</li>
+                    <li>Kumar, K. H., & Srinivas, K. (2024). <em>Expert Systems with Applications</em>, 251, 124107.</li>
+                    <li>Mienye, I. D., & Jere, N. (2024). <em>IEEE Access</em>, 12, 86716–86727.</li>
+                    <li>Nawaz, M. A. et al. (2020). ICAISC-2020.</li>
+                    <li>Rankovic, N. et al. (2021). <em>IEEE Access</em>, 9, 26926–26936.</li>
+                    <li>Shepperd, M. (2025). <em>IEEE Transactions on Software Engineering</em>.</li>
+                    <li>Tazwar, S. et al. (2024). ICPRAM.</li>
+                    <li>Yusri, H. I. H. et al. (2022). ICSGRC.</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

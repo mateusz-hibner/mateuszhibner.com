@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mateusz Hibner - W.A.S.T.E. Project">
+    <title>W.A.S.T.E. · Mateusz Hibner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="src/styles/main.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="profile-section">
+                <img src="public/images/mh.jpg" alt="Mateusz Hibner" class="profile-picture">
+                <div class="profile-text">
+                    <h1 class="name">Mateusz Hibner</h1>
+                    <p class="description">Waste Assessment and Sorting Technology Engine (W.A.S.T.E.) case study.</p>
+                </div>
+            </div>
+        </header>
+
+        <section class="links-section">
+            <div class="links-grid">
+                <a href="index.html" class="link-card">Home</a>
+                <a href="projects.html" class="link-card">Projects</a>
+                <a href="courses.html" class="link-card">Courses</a>
+            </div>
+        </section>
+
+        <section class="project-case-study" id="waste">
+            <header class="project-case-study__header">
+                <h2>W.A.S.T.E. — Waste Assessment and Sorting Technology Engine</h2>
+                <p class="project-authors">Kazimierz Garstecki · Mateusz Hibner · Benjamin van den Hurk · Wojciech Izydorzak · Jakub Michałowski</p>
+            </header>
+
+            <div class="project-case-study__body">
+                <div class="project-media project-media--intro">
+                    <figure>
+                        <img src="public/videos/waste.gif" alt="Animated classification walkthrough" loading="lazy">
+                        <figcaption>Quick GIF preview of the classification and lid-opening flow.</figcaption>
+                    </figure>
+                    <figure>
+                        <img src="public/images/waste pic.jpg" alt="W.A.S.T.E. prototype mockup" loading="lazy">
+                        <figcaption>Prototype shell showing dual compartments and signage.</figcaption>
+                    </figure>
+                </div>
+
+                <h3>Overview</h3>
+                <p>W.A.S.T.E. is a CNN-powered trash can that recognizes common waste streams and automatically opens the matching compartment. By guiding people with visual cues and hands-free lids, it lowers the cognitive load of sorting trash while keeping the interaction playful and intuitive.</p>
+
+                <h3>How it works</h3>
+                <p>The system runs on a Raspberry Pi 5 with a Camera Module 2 and an HC-SR04 ultrasonic sensor that wakes the camera when someone approaches. A fine-tuned YOLO 11s classifier (trained on 13k images) evaluates short bursts of frames; if enough frames cross a 60% confidence threshold, the corresponding SG90 servo opens either the paper lid or the plastic/metal lid. LEDs provide immediate feedback during inference or rejection.</p>
+
+                <h3>My role</h3>
+                <p>I led the fine-tuning of the YOLO 11s classifier—curating the 13k image dataset, designing augmentation strategies, and iterating on confidence thresholds so the model could run reliably on the Raspberry Pi 5 without dedicated GPU acceleration.</p>
+
+                <div class="project-media">
+                    <figure>
+                        <video controls playsinline preload="metadata">
+                            <source src="public/videos/desktop demo.mp4" type="video/mp4">
+                            <source src="public/videos/desktop demo.mp4" type="video/webm">
+                            Your browser does not support the video element.
+                        </video>
+                        <figcaption>Desktop demo showcasing the fine-tuned model running end-to-end.</figcaption>
+                    </figure>
+                </div>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
