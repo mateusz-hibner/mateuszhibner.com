@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mateusz Hibner - BeEpBoOp Project">
+    <title>BeEpBoOp · Mateusz Hibner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="src/styles/main.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="profile-section">
+                <img src="public/images/mh.jpg" alt="Mateusz Hibner" class="profile-picture">
+                <div class="profile-text">
+                    <h1 class="name">Mateusz Hibner</h1>
+                    <p class="description">BeEpBoOp — PC compatibility assistant built for the Megekko Hackathon.</p>
+                </div>
+            </div>
+        </header>
+
+        <section class="links-section">
+            <div class="links-grid">
+                <a href="index.html" class="link-card">Home</a>
+                <a href="projects.html" class="link-card">Projects</a>
+                <a href="courses.html" class="link-card">Courses</a>
+            </div>
+        </section>
+
+        <section class="project-case-study" id="beepboop">
+            <header class="project-case-study__header">
+                <h2>BeEpBoOp — PC-Building Helper</h2>
+                <p class="project-authors">Megekko Hackathon • React/Next.js · FastAPI · PostgreSQL</p>
+            </header>
+
+            <div class="project-case-study__body">
+                <h3>TL;DR</h3>
+                <p>BeEpBoOp is a full-stack assistant that helps you assemble a compatible PC. The React/Next.js frontend lets you pick parts, while a FastAPI backend with a parts database returns compatible CPUs, GPUs, motherboards, RAM, storage, cases, PSUs, and cooling options for the build in real time. <a href="https://github.com/J4nvg/BeEpBoOp" target="_blank" rel="noopener noreferrer">GitHub repo</a>.</p>
+
+                <h3>Backend</h3>
+                <p>The backend (FastAPI + SQLAlchemy) exposes POST endpoints per component type (e.g., <code>/cpu</code>, <code>/mb</code>, <code>/psu</code>) that accept the current configuration and respond with compatible parts. Pydantic models describe the payloads, CORS is configured for local dev, and the stack uses orchestrated data models (<code>CPU</code>, <code>Motherboard</code>, <code>GPU</code>, etc.) backed by PostgreSQL.</p>
+
+                <h3>Frontend</h3>
+                <p>The Next.js app defines component categories in <code>lib/types.ts</code> and renders pickers in <code>app/page.tsx</code>. Selecting a slot sends the current build to <code>fetchCompatible</code> in <code>lib/api.ts</code>, which POSTs to the FastAPI endpoint defined by the component id (CPU, MB, GPU, RAM, storage, cooling, case, PSU). Results are rendered as suggestions the user can accept to update the build.</p>
+
+                <h3>Data pipeline</h3>
+                <p>Custom scrapers populate the parts database from Megekko listings. ETL notebooks clean the data, deduplicate specs, and seed the database so compatibility queries can run quickly during hackathon demos.</p>
+
+                <h3>My role</h3>
+                <p>I focused on diagnosing API behavior to articulate what the system actually does, mapping endpoints, data models, and the front-to-back flow so teammates could iterate confidently during the hackathon handoff.</p>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

@@ -54,9 +54,6 @@
                 <h3>How it works</h3>
                 <p>The system runs on a Raspberry Pi 5 with a Camera Module 2 and an HC-SR04 ultrasonic sensor that wakes the camera when someone approaches. A fine-tuned YOLO 11s classifier (trained on 13k images) evaluates short bursts of frames; if enough frames cross a 60% confidence threshold, the corresponding SG90 servo opens either the paper lid or the plastic/metal lid. LEDs provide immediate feedback during inference or rejection.</p>
 
-                <h3>My role</h3>
-                <p>I led the fine-tuning of the YOLO 11s classifier—curating the 13k image dataset, designing augmentation strategies, and iterating on confidence thresholds so the model could run reliably on the Raspberry Pi 5 without dedicated GPU acceleration.</p>
-
                 <div class="project-media">
                     <figure>
                         <video controls playsinline preload="metadata">
