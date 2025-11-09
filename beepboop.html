@@ -26,7 +26,7 @@
             <div class="links-grid">
                 <a href="index.html" class="link-card">Home</a>
                 <a href="projects.html" class="link-card">Projects</a>
-                <a href="courses.html" class="link-card">Courses</a>
+                <a href="certifications.html" class="link-card">Certifications</a>
             </div>
         </section>
 
@@ -38,19 +38,39 @@
 
             <div class="project-case-study__body">
                 <h3>TL;DR</h3>
-                <p>BeEpBoOp is a full-stack assistant that helps you assemble a compatible PC. The React/Next.js frontend lets you pick parts, while a FastAPI backend with a parts database returns compatible CPUs, GPUs, motherboards, RAM, storage, cases, PSUs, and cooling options for the build in real time. <a href="https://github.com/J4nvg/BeEpBoOp" target="_blank" rel="noopener noreferrer">GitHub repo</a>.</p>
+                <p>BeEpBoOp is a full-stack assistant that helps you assemble a compatible PC. The React/Next.js frontend lets you pick parts, while a FastAPI backend with a parts database returns compatible CPUs, GPUs, motherboards, RAM, storage, cases, PSUs, and cooling options for the build in real time. We shipped it during the Megekko Hackathon, took first place, and split a EUR 1,000 prize. <a href="https://github.com/J4nvg/BeEpBoOp" target="_blank" rel="noopener noreferrer">GitHub repo</a>.</p>
+
+                <figure class="project-case-study__hero">
+                    <img src="public/images/megekko1.jpg" alt="Megekko front 1 — BeEpBoOp landing view" loading="lazy">
+                </figure>
+
+                <div class="project-case-study__gallery">
+                    <figure>
+                        <img src="public/images/megekko3.jpeg" alt="BeEpBoOp component selection flow" loading="lazy">
+                    </figure>
+                    <figure>
+                        <img src="public/images/megekko4.jpeg" alt="BeEpBoOp final build summary" loading="lazy">
+                    </figure>
+                </div>
 
                 <h3>Backend</h3>
                 <p>The backend (FastAPI + SQLAlchemy) exposes POST endpoints per component type (e.g., <code>/cpu</code>, <code>/mb</code>, <code>/psu</code>) that accept the current configuration and respond with compatible parts. Pydantic models describe the payloads, CORS is configured for local dev, and the stack uses orchestrated data models (<code>CPU</code>, <code>Motherboard</code>, <code>GPU</code>, etc.) backed by PostgreSQL.</p>
 
+                <figure class="project-case-study__hero">
+                    <img src="public/images/megekko-pc-builder-1.png" alt="Megekko PC Builder backend data flow" loading="lazy">
+                    <figcaption>Megekko PC Builder backend view highlighting FastAPI data flow between endpoints.</figcaption>
+                </figure>
+
                 <h3>Frontend</h3>
                 <p>The Next.js app defines component categories in <code>lib/types.ts</code> and renders pickers in <code>app/page.tsx</code>. Selecting a slot sends the current build to <code>fetchCompatible</code> in <code>lib/api.ts</code>, which POSTs to the FastAPI endpoint defined by the component id (CPU, MB, GPU, RAM, storage, cooling, case, PSU). Results are rendered as suggestions the user can accept to update the build.</p>
 
+                <figure class="project-case-study__hero">
+                    <img src="public/images/megekko-pc-builder-2.png" alt="Megekko PC Builder frontend interactions" loading="lazy">
+                    <figcaption>Megekko PC Builder frontend flow showing interactive component pickers and suggestions.</figcaption>
+                </figure>
+
                 <h3>Data pipeline</h3>
                 <p>Custom scrapers populate the parts database from Megekko listings. ETL notebooks clean the data, deduplicate specs, and seed the database so compatibility queries can run quickly during hackathon demos.</p>
-
-                <h3>My role</h3>
-                <p>I focused on diagnosing API behavior to articulate what the system actually does, mapping endpoints, data models, and the front-to-back flow so teammates could iterate confidently during the hackathon handoff.</p>
             </div>
         </section>
     </div>

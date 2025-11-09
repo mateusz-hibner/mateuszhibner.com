@@ -380,6 +380,67 @@ a:focus-visible {
     gap: 0.5rem;
 }
 
+.course-cert {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    padding: 0.75rem 0;
+}
+
+.course-cert__icon {
+    width: 140px;
+    height: 140px;
+    flex-shrink: 0;
+    border-radius: 12px;
+    border: 1px solid #e0e0e0;
+    padding: 0;
+    background: #fff;
+    object-fit: cover;
+    display: block;
+}
+
+.course-cert__icon--contain {
+    padding: 0.35rem;
+    object-fit: contain;
+}
+
+.course-cert__details {
+    flex: 1;
+}
+
+.course-cert__title {
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 0.35rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
+}
+
+.course-cert__title span {
+    color: #7a7a7a;
+    font-size: 0.85rem;
+    letter-spacing: 0.08em;
+}
+
+.course-cert__title a {
+    color: #000;
+    text-decoration: none;
+}
+
+.course-cert__title a:hover {
+    text-decoration: underline;
+}
+
+.course-cert__summary {
+    margin: 0;
+    font-size: 0.95rem;
+    line-height: 1.5;
+    color: #222;
+}
+
 .course-group li {
     font-size: 0.95rem;
     line-height: 1.5;
@@ -497,6 +558,53 @@ a:focus-visible {
     font-size: 0.98rem;
     line-height: 1.7;
     margin-bottom: 0.75rem;
+}
+
+.project-case-study__hero {
+    margin: 1.5rem 0 2rem;
+    padding: 1rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    background: #fdfdfd;
+}
+
+.project-case-study__hero img {
+    width: 100%;
+    display: block;
+    border-radius: 8px;
+    margin-bottom: 0.5rem;
+}
+
+.project-case-study__hero figcaption {
+    font-size: 0.9rem;
+    color: #444;
+}
+
+.project-case-study__gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.project-case-study__gallery figure {
+    margin: 0;
+    padding: 0.75rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    background: #fafafa;
+}
+
+.project-case-study__gallery img {
+    width: 100%;
+    display: block;
+    border-radius: 6px;
+}
+
+.project-case-study__gallery figcaption {
+    font-size: 0.85rem;
+    color: #555;
+    margin-top: 0.5rem;
 }
 
 .project-references {
