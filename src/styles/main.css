@@ -103,13 +103,20 @@ body {
     color: #000;
     text-decoration: none;
     font-weight: 600;
-    padding: 0.25rem 0;
+    padding: 0.25rem 0.75rem;
 }
 
-.link-card + .link-card::before {
+.link-card::after {
     content: '|';
+    position: absolute;
+    right: -0.4rem;
+    top: 50%;
+    transform: translateY(-50%);
     color: #666;
-    margin: 0 0.5rem;
+}
+
+.link-card:last-of-type::after {
+    display: none;
 }
 
 .link-card:hover {
