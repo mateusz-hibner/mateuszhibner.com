@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Mateusz Hibner - Topic Classification with Pretrained Embeddings">
+    <title>Topic Classification · Mateusz Hibner</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="src/styles/main.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <div class="profile-section">
+                <img src="public/images/mh.jpg" alt="Mateusz Hibner" class="profile-picture">
+                <div class="profile-text">
+                    <h1 class="name">Mateusz Hibner</h1>
+                    <p class="description">TREC topic classification with pretrained embeddings and neural architectures.</p>
+                </div>
+            </div>
+        </header>
+
+        <section class="links-section">
+            <div class="links-grid">
+                <a href="index.html" class="link-card">
+                    <span class="link-text">Home</span>
+                </a>
+                <a href="projects.html" class="link-card">
+                    <span class="link-text">Projects</span>
+                </a>
+                <a href="certifications.html" class="link-card">
+                    <span class="link-text">Certifications</span>
+                </a>
+                <a href="https://github.com/mateusz-hibner" target="_blank" rel="noopener noreferrer" class="link-card">
+                    <span class="link-icon">🔗</span>
+                    <span class="link-text">GitHub</span>
+                </a>
+                <a href="https://www.linkedin.com/in/mateusz-hibner-60199b298/" target="_blank" rel="noopener noreferrer" class="link-card">
+                    <span class="link-icon">💼</span>
+                    <span class="link-text">LinkedIn</span>
+                </a>
+                <a href="https://www.goodreads.com/user/show/115745205-mateusz-hibner" target="_blank" rel="noopener noreferrer" class="link-card">
+                    <span class="link-icon">📚</span>
+                    <span class="link-text">Goodreads</span>
+                </a>
+                <a href="https://www.youtube.com/@HibnerMateusz" target="_blank" rel="noopener noreferrer" class="link-card">
+                    <span class="link-icon">▶️</span>
+                    <span class="link-text">YouTube</span>
+                </a>
+            </div>
+        </section>
+
+        <section class="project-case-study" id="trec-topic-classification">
+            <header class="project-case-study__header">
+                <h2>TREC Topic Classification</h2>
+                <p class="project-authors">PyTorch · spaCy · GloVe 6B-100d · PCA</p>
+            </header>
+
+            <div class="project-case-study__body">
+                <h3>TL;DR</h3>
+                <p>This assignment recreates a full NLP workflow for sentence-level topic classification using the TREC Question Classification dataset. After preparing a clean vocabulary and mitigating OOV issues with a global mean vector initialization, I compared a vanilla RNN, BiLSTM, BiGRU, and CNN. The best classical RNN variant hit 89% test accuracy, while the CNN topped out at 90.2%, highlighting how pretrained embeddings, regularization, and pooling strategies interact. <a href="https://github.com/JonssonAlexander/NLP_Project_group45" target="_blank" rel="noopener noreferrer">GitHub repo</a>.</p>
+
+                <h3>1. Introduction</h3>
+                <p>Topic classification assigns predefined intent labels to a question so downstream systems can route or prioritize it. The core idea is simple—map raw text to embeddings, then let a neural model infer its topic—but pulling that off for thousands of noisy, short queries forces us to reason about vocabulary coverage, sequence modeling, and evaluation beyond headline accuracy.</p>
+                <p>The learning objective for this course project was to turn the semester’s theory into a compare-and-contrast study. I built pipelines that ingest pretrained word embeddings, trained several architectures (RNN, BiLSTM, BiGRU, CNN), quantified how pooling and regularization affect generalization, and documented how different topics benefit from different cues.</p>
+
+                <h3>2. Preparing Word Embeddings</h3>
+                <h4>2.1 Dataset</h4>
+                <p>I worked with the TREC Question Classification dataset (Training set 5 with 5,500 labeled questions). After an 80/20 split with a fixed random seed (42), the test set with 10 held-out questions provided a final checkpoint. Each question belongs to one of six coarse-grained categories:</p>
+                <ul>
+                    <li><strong>ABBR</strong> – abbreviation definitions (e.g., “What does AIDS stand for?”)</li>
+                    <li><strong>DESC</strong> – descriptive prompts (e.g., “How did serfdom develop in Russia?”)</li>
+                    <li><strong>ENTY</strong> – entity lookups</li>
+                    <li><strong>HUM</strong> – questions about people</li>
+                    <li><strong>LOC</strong> – geographic targets</li>
+                    <li><strong>NUM</strong> – numeric facts (counts, dates, measurements)</li>
+                </ul>
+
+                <h4>2.2 Vocabulary and preprocessing</h4>
+                <p>Tokenization was handled by spaCy’s <code>en_core_web_sm</code> model. All text was lowercased, two special symbols (<code>&lt;pad&gt;</code>, <code>&lt;unk&gt;</code>) were injected, and I applied a minimum frequency of one so every observed token earned a vocabulary slot. The resulting corpus held 4,361 training questions across 45,591 tokens, yielding a vocabulary of 7,479 entries including specials.</p>
+
+                <h4>2.3 OOV analysis and mitigation</h4>
+                <p>When mapping tokens to GloVe 6B-100d embeddings, 197 unique words turned out to be OOV, totaling 215 occurrences. Unsurprisingly, categories packed with proper nouns (DESC, ENTY, HUM) drove most of the misses. Instead of random initialization, I computed the global mean vector across all in-vocabulary embeddings and assigned it to every OOV token (and left the embeddings trainable). This centers unknown words in semantic space without biasing the mean with non-lexical tokens.</p>
+
+                <h4>2.4 Semantic clustering</h4>
+                <p>To sanity-check the embedding space, I sampled the 20 most frequent tokens per topic and projected them via PCA. LOC and NUM clusters tightened nicely, signaling coherent semantics, while ABBR, DESC, and HUM points were more diffuse—echoing their lexical variety. Even punctuation such as question marks floated separately, which is expected because they mainly contribute syntactic cues.</p>
+
+                <figure class="project-media">
+                    <img src="public/images/nlp_pca.png" alt="PCA scatter plot of TREC embeddings colored by topic" loading="lazy">
+                    <figcaption>Real PCA projection confirms the tight LOC/NUM clusters and the spread of ABBR/DESC/HUM vocabularies.</figcaption>
+                </figure>
+
+                <h3>3. RNN training & evaluation</h3>
+                <h4>3.1 Best configuration</h4>
+                <p>The strongest vanilla RNN used a hidden size of 128, one recurrent layer, dropout of 0.1, and gradient clipping at 1.0. Training ran for 40 epochs with Adam (lr = 1e-3), batch size 64, and max pooling over hidden states. Validation accuracy peaked at 0.853 around epoch 15, while the tiny test set topped out at 0.800.</p>
+
+                <h4>3.2 Regularization experiments</h4>
+                <p>I swept 49 combinations covering dropout (0.0–0.6), L2 weight decay (0.0–1e-2), gradient clipping, and early stopping. Dropout 0.1 plus weight decay 0.0 and <code>grad_clip=1.0</code> offered the best validation score (0.841), showing that mild stochastic regularization was enough for this compact dataset.</p>
+
+                <h4>3.3 Training dynamics</h4>
+                <p>Loss curves dropped quickly over the first ten epochs and then leveled out, so early stopping prevented overfitting once validation loss plateaued. That behavior confirmed the model converged cleanly and did not need aggressive scheduling tricks.</p>
+
+                <figure class="project-media">
+                    <img src="public/images/nlp_training_dynamics.png" alt="Training and validation accuracy curves for the RNN" loading="lazy">
+                    <figcaption>Training curves illustrate the rapid early gains and the plateau that triggered early stopping around epoch 15.</figcaption>
+                </figure>
+
+                <h4>3.4 Pooling strategies</h4>
+                <p>To summarize sequences, I tried max, mean, last hidden state, and attention pooling. Max pooling generalized best by a small margin:</p>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Pooling method</th>
+                            <th>Test accuracy</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Max pooling</td>
+                            <td>88.2%</td>
+                        </tr>
+                        <tr>
+                            <td>Mean pooling</td>
+                            <td>87.4%</td>
+                        </tr>
+                        <tr>
+                            <td>Last hidden state</td>
+                            <td>86.4%</td>
+                        </tr>
+                        <tr>
+                            <td>Attention pooling</td>
+                            <td>86.2%</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+                <h4>3.5 Topic-wise accuracy</h4>
+                <p>DESC and LOC dominated with 0.97 and 0.93 accuracy respectively—their cues are frequent in the training set. HUM and NUM followed closely (0.89/0.88) thanks to obvious lexical markers such as “who” or “how many.” ENTY and ABBR lagged (0.63/0.78) because they are sparse and contain specialized terminology that GloVe does not always capture.</p>
+
+                <h3>4. Enhancements</h3>
+                <h4>4.1 Bidirectional recurrent models</h4>
+                <p>Upgrading the baseline to bidirectional variants paid off immediately. The BiLSTM stacks a forward and backward pass so each prediction considers both preceding and succeeding context, stabilizing gradients with its gating mechanisms. It reached 88.0% test accuracy. The BiGRU trimmed parameters by merging gates yet edged ahead with 89.0%, most likely because the simplified update gate converged faster on this dataset.</p>
+
+                <h4>4.2 Convolutional neural network</h4>
+                <p>A 1D CNN replaced recurrent passes with kernel banks that capture local n-grams. After convolution + max pooling, a dense head aggregated the most salient phrase-level activations. Besides being easier to parallelize, it booked the best score overall—90.2% test accuracy.</p>
+
+                <figure class="project-media">
+                    <img src="public/images/nlp_model_comparison.png" alt="Bar chart comparing TREC model accuracies" loading="lazy">
+                    <figcaption>Model comparison: the CNN edges out BiGRU/BiLSTM, while the regular RNN lags a few points behind.</figcaption>
+                </figure>
+
+                <h4>4.3 Further improvements</h4>
+                <p>Two promising next steps are swapping in contextual embeddings (e.g., DistilBERT) to reduce reliance on static GloVe vectors, and augmenting underrepresented classes (ABBR/ENTY) via paraphrasing or back-translation so that the classifier sees more lexical variety during training.</p>
+
+                <h4>4.4 Topic-focused tuning</h4>
+                <p>Per-class diagnostics suggested specialized thresholds could boost the weakest categories. For example, label-specific loss weighting would penalize ABBR mistakes more, while ontology-driven gazetteers for entities could enrich ENTY representations. Calibrating confidence per class would also help downstream systems decide when to trigger human review.</p>
+            </div>
+        </section>
+    </div>
+</body>
+</html>

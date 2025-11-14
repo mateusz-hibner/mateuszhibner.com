@@ -630,6 +630,66 @@ a:focus-visible {
     margin-bottom: 0.75rem;
 }
 
+.project-case-study__body ul,
+.project-case-study__body ol,
+.project-toc ol {
+    margin: 0 0 1rem;
+    padding-left: 1.25rem;
+    list-style-position: inside;
+}
+
+.project-case-study__body li,
+.project-toc li {
+    margin-bottom: 0.4rem;
+    line-height: 1.6;
+}
+
+.project-toc {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1rem;
+    background: #fafafa;
+    margin: 1.25rem 0;
+}
+
+.project-toc h3 {
+    margin-top: 0;
+    font-size: 1rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.project-case-study__body table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+.project-case-study__body th,
+.project-case-study__body td {
+    border: 1px solid #e0e0e0;
+    padding: 0.6rem;
+    text-align: left;
+    font-size: 0.95rem;
+}
+
+.project-case-study__body thead {
+    background: #f5f5f5;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+}
+
+.project-case-study__body pre {
+    margin: 1rem 0;
+    padding: 0.85rem 1rem;
+    background: #111;
+    color: #f2f2f2;
+    border-radius: 6px;
+    overflow-x: auto;
+    font-size: 0.95rem;
+    line-height: 1.5;
+}
+
 .project-case-study__hero {
     margin: 1.5rem 0 2rem;
     padding: 1rem;
@@ -643,6 +703,12 @@ a:focus-visible {
     display: block;
     border-radius: 8px;
     margin-bottom: 0.5rem;
+}
+
+.project-case-study__hero--menu img {
+    max-width: 720px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .project-case-study__hero figcaption {
@@ -675,6 +741,19 @@ a:focus-visible {
     font-size: 0.85rem;
     color: #555;
     margin-top: 0.5rem;
+}
+
+.project-case-study__gallery--flashcards {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 1.5rem;
+}
+
+.project-case-study__gallery--flashcards figure {
+    padding: 1rem;
+}
+
+.project-case-study__gallery--flashcards img {
+    border-radius: 10px;
 }
 
 .project-references {
